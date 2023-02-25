@@ -4,10 +4,20 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
+var mongoose = require('mongoose');
+var configDB = require('./database/mongodb');
+mongoose.connect(configDB.mongo.uri);
+
+
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var osRouter=require('./routes/os');
 var productsRouter=require('./routes/products');
+var form=require('./routes/form')
+var cRouter = require('./routes/contact');
+var AuthRouter=require('./routes/authentication');
 
 
 var app = express();
@@ -27,6 +37,10 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/os',osRouter);
 app.use('/products',productsRouter);
+app.use('/form',form);
+app.use('/create',form);
+app.use('/contact', cRouter);
+app.use('/authentication',AuthRouter);
 
 
 
